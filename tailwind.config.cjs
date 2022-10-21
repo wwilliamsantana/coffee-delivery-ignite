@@ -27,7 +27,7 @@ module.exports = {
     extend: {
      fontFamily:{
       sans: ["Roboto", "sans-serif"],
-      barlow: ["Barlow", "sans-serif"]
+      baloo: ["'Baloo 2'", "cursive"]
      },
      backgroundImage:{
       'backHeading': "url('/src/assets/Background.svg')",

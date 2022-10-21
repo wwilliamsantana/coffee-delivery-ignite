@@ -9,6 +9,7 @@ export function App() {
       <Navbar />
       <Heading />
       <ListCoffees />
+
     </div>
   )
 }

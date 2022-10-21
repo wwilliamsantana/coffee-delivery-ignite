@@ -15,14 +15,22 @@ export function Navbar() {
           <div >Porto Alegre, RS</div>
         </div>
 
-        <a className="p-2 bg-yellow-light text-yellow-dark rounded-md">
-          <ShoppingCart size={22} weight="fill" />
+
+        <a className="relative">
+          <div className="p-2 bg-yellow-light text-yellow-dark rounded-md ">
+            <ShoppingCart size={22} weight="fill" />
+          </div>
+          <div className="absolute -top-2 -right-2 ">
+            <div className=" w-5 h-5 rounded-full bg-yellow-dark text-white text-center pt-0.5 text-xs">
+              5
+            </div>
+
+          </div>
         </a>
 
+
+
       </div>
-
-
-
     </div>
   )
 }

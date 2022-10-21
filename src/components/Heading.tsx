@@ -3,7 +3,7 @@ import { ShoppingCart, Timer, Package, Coffee } from "phosphor-react"
 
 export function Heading() {
   return (
-    <div className="bg-backHeading w-full bg-cover bg-center">
+    <header className="bg-backHeading w-full bg-cover bg-center">
       <div className="max-w-[70rem] mx-auto flex item-center justify-between gap-4">
 
         <div className="flex-1 flex flex-col justify-center">
@@ -43,6 +43,6 @@ export function Heading() {
         </div>
 
       </div>
-    </div>
+    </header>
   )
 }

@@ -3,7 +3,7 @@ import image1 from "../assets/coffees/Image.svg"
 
 export function ItemCoffee() {
   return (
-    <div className="w-64 h-[19.375rem]  rounded-md bg-base-card rounded-tr-[2.25rem] rounded-bl-[2.25rem] flex flex-col items-center  ">
+    <div className="w-64 h-[19.375rem] flex-1 rounded-md bg-base-card rounded-tr-[2.25rem] rounded-bl-[2.25rem] flex flex-col items-center  ">
 
       <img className="w-[7.5rem] h-[7.5rem]  -mt-8 " src={image1} alt="" />
 
@@ -29,7 +29,7 @@ export function ItemCoffee() {
 
           <div className="bg-base-button p-2 flex items-center gap-2 rounded-md ">
 
-            <button className="text-purple">
+            <button className="text-purple hover:text-purple-dark">
               <Minus size={14} weight={"bold"} />
             </button>
 
@@ -37,14 +37,14 @@ export function ItemCoffee() {
               2
             </span>
 
-            <button className="text-purple">
+            <button className="text-purple hover:text-purple-dark">
               <Plus size={14} weight={"bold"} />
             </button>
 
 
           </div>
 
-          <button className="p-2 bg-purple-dark text-white rounded-md ">
+          <button className="p-2 bg-purple-dark text-white rounded-md hover:bg-purple">
             <ShoppingCart size={22} weight="fill" />
           </button>
 

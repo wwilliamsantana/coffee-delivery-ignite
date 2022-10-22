@@ -1,12 +1,15 @@
 import logo from "../assets/Logo.svg"
+import { NavLink } from "react-router-dom"
 import { ShoppingCart, MapPin } from "phosphor-react"
 
 export function Navbar() {
   return (
     <div className="max-w-[70rem] mx-auto py-8 flex justify-between items-center">
 
+      <NavLink to={"/"}>
+        <img className="h-[40px]" src={logo} alt="" />
+      </NavLink>
 
-      <img className="h-[40px]" src={logo} alt="" />
 
       <div className="flex items-center gap-3">
 
@@ -16,19 +19,16 @@ export function Navbar() {
         </div>
 
 
-        <a className="relative">
-          <div className="p-2 bg-yellow-light text-yellow-dark rounded-md ">
+        <NavLink to={"/checkout"} className="relative">
+          <button className="p-2 bg-yellow-light text-yellow-dark rounded-md ">
             <ShoppingCart size={22} weight="fill" />
-          </div>
+          </button>
           <div className="absolute -top-2 -right-2 ">
             <div className=" w-5 h-5 rounded-full bg-yellow-dark text-white text-center pt-0.5 text-xs">
               5
             </div>
-
           </div>
-        </a>
-
-
+        </NavLink>
 
       </div>
     </div>

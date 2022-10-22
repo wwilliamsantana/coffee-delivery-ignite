@@ -1,13 +1,138 @@
-import { Minus, Plus, Trash } from "phosphor-react"
+import { Minus, Plus, Trash, MapPinLine, CurrencyDollar, CreditCard, Bank, Money } from "phosphor-react"
+import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import image1 from "../../assets/coffees/Image.svg"
+import { useState } from "react";
 
 export function Checkout() {
+
+  const [paymentMethod, setPaymentMethod] = useState<string>("")
+
+  console.log(paymentMethod)
+
   return (
-    <div className="max-w-[70rem] mx-auto flex items-start justify-center">
+    <div className="max-w-[70rem] mx-auto flex items-start justify-center gap-8">
 
-      {/* <div className="flex-1 flex items-center">
+      <div className="flex flex-col flex-1 gap-[0.9375rem] items-start">
+        <span className="font-baloo font-bold text-lg text-base-subtitle">Complete seu pedido</span>
 
-      </div> */}
+        <div className="bg-base-card p-10 rounded-md w-full flex flex-col gap-8">
+
+          <div className="flex items-start gap-2">
+            <MapPinLine size={22} className="text-yellow-dark" />
+
+            <div className="flex items-start flex-col">
+              <span className="text-base-subtitle">Endereço de Entrega</span>
+              <span className="text-base-text text-sm">Informe o endereço onde deseja receber seu pedido</span>
+
+            </div>
+
+          </div>
+
+          <form action="" className="flex flex-col gap-4">
+
+            <input
+              className="w-[12.5rem] bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
+              type="number"
+              placeholder="CEP"
+            />
+            <input
+              className="w-full bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
+              type="text"
+              placeholder="Rua"
+            />
+
+            <div className="flex gap-3 items-center">
+              <input
+                className="w-[12.5rem] bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
+                type="number"
+                placeholder="Número"
+              />
+              <div className="relative w-full ">
+                <input
+                  className="w-full bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
+                  type="text"
+                  placeholder="Complemento"
+                />
+                <span className="absolute right-3 top-4  text-base-label italic text-xs select-none">Opcional</span>
+              </div>
+
+            </div>
+
+            <div className="flex gap-3 items-center">
+
+              <input
+                className="w-[12.5rem] bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
+                type="number"
+                placeholder="Bairro"
+              />
+              <input
+                className="w-full bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
+                type="number"
+                placeholder="Cidade"
+              />
+              <input
+                className="w-[3.75rem] bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
+                type="number"
+                placeholder="UF"
+              />
+
+
+            </div>
+
+
+
+
+          </form>
+
+        </div>
+
+
+        <div className="bg-base-card p-10 rounded-md w-full flex flex-col gap-8">
+
+          <div className="flex items-start gap-2">
+            <CurrencyDollar size={22} className="text-purple" />
+            <div className="flex items-start flex-col">
+              <span className="text-base-subtitle">Pagamento</span>
+              <span className="text-base-text text-sm">O pagamento é feito na entrega. Escolha a forma que deseja pagar</span>
+            </div>
+          </div>
+
+
+          <ToggleGroup.Root type="single" className="flex items-center gap-3" onValueChange={setPaymentMethod} value={paymentMethod}  >
+            <ToggleGroup.Item
+              value="0"
+              className={`uppercase w-full p-4 rounded-md  text-base-text text-xs hover:bg-base-hover flex items-center gap-3 ${paymentMethod === "0" ? "bg-purple-light border-1 ring-1 ring-purple" : "bg-base-button ring-0"}`}
+            >
+              <CreditCard size={17} className="text-purple" />
+              Cartão de Crédito
+            </ToggleGroup.Item>
+
+            <ToggleGroup.Item
+              value="1"
+              className={`uppercase w-full p-4 rounded-md  text-base-text text-xs hover:bg-base-hover flex items-center gap-3 ${paymentMethod === "1" ? "bg-purple-light ring-1 ring-purple" : "bg-base-button ring-0"}`}
+            >
+              <Bank size={17} className="text-purple" />
+              cartão de débito
+            </ToggleGroup.Item>
+
+            <ToggleGroup.Item
+              value="2"
+              className={`uppercase w-full p-4 rounded-md  text-base-text text-xs hover:bg-base-hover flex items-center gap-3 ${paymentMethod === "2" ? "bg-purple-light ring-1 ring-purple" : "bg-base-button ring-0"}`}
+            >
+              <Money size={17} className="text-purple" />
+              Dinheiro
+            </ToggleGroup.Item>
+          </ToggleGroup.Root>
+
+
+
+
+        </div>
+
+      </div>
+
+
+
       <div className="flex flex-col gap-[0.9375rem] items-start">
         <span className="font-baloo font-bold text-lg text-base-subtitle">Cafés selecionados</span>
 

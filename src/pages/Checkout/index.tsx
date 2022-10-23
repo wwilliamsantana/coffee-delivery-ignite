@@ -2,6 +2,7 @@ import { Minus, Plus, Trash, MapPinLine, CurrencyDollar, CreditCard, Bank, Money
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import image1 from "../../assets/coffees/Image.svg"
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export function Checkout() {
 
@@ -10,7 +11,7 @@ export function Checkout() {
   console.log(paymentMethod)
 
   return (
-    <div className="max-w-[70rem] mx-auto flex items-start justify-center gap-8">
+    <div className="max-w-[70rem] mx-auto flex items-start justify-center gap-8 mt-10">
 
       <div className="flex flex-col flex-1 gap-[0.9375rem] items-start">
         <span className="font-baloo font-bold text-lg text-base-subtitle">Complete seu pedido</span>
@@ -62,26 +63,23 @@ export function Checkout() {
 
               <input
                 className="w-[12.5rem] bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
-                type="number"
+                type="text"
                 placeholder="Bairro"
               />
               <input
                 className="w-full bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
-                type="number"
+                type="text"
                 placeholder="Cidade"
               />
               <input
                 className="w-[3.75rem] bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
-                type="number"
+                type="text"
+
                 placeholder="UF"
               />
 
 
             </div>
-
-
-
-
           </form>
 
         </div>
@@ -227,11 +225,11 @@ export function Checkout() {
 
             </div>
 
-
-            <button className="bg-yellow hover:bg-yellow-dark text-white px-2 py-3 rounded-md uppercase text-center mt-6">
-              Confirmar pedido
-            </button>
-
+            <NavLink to={"/checkout/success"}>
+              <button className="bg-yellow hover:bg-yellow-dark w-full text-white font-bold px-2 py-3 rounded-md uppercase text-center mt-6">
+                Confirmar pedido
+              </button>
+            </NavLink>
 
           </div>
         </div>

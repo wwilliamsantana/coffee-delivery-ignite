@@ -21,9 +21,8 @@ module.exports = {
       "base-card": "#F3F2F2",
 
       "background": "#FAFAFA",
-      "white": "#FFFFFF"
-
-    },
+      "white": "#FFFFFF",
+      
     extend: {
      fontFamily:{
       sans: ["Roboto", "sans-serif"],
@@ -31,10 +30,16 @@ module.exports = {
      },
      backgroundImage:{
       'backHeading': "url('/src/assets/Background.svg')",
+      "success-linear": "linear-gradient(102.89deg, #DBAC2C 2.61%, #8047F8 98.76%);"
+     },
      }
     },
   },
   plugins: [],
 }
+
+
+
+
 
 

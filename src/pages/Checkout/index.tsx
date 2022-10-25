@@ -3,6 +3,8 @@ import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import image1 from "../../assets/coffees/Image.svg"
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { InputForm } from "./components/InputForm";
+import { ItemCartBuy } from "./components/ItemCartBuy";
 
 export function Checkout() {
 
@@ -24,36 +26,27 @@ export function Checkout() {
             <div className="flex items-start flex-col">
               <span className="text-base-subtitle">Endereço de Entrega</span>
               <span className="text-base-text text-sm">Informe o endereço onde deseja receber seu pedido</span>
-
             </div>
 
           </div>
 
           <form action="" className="flex flex-col gap-4">
 
-            <input
-              className="w-[12.5rem] bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
-              type="number"
-              placeholder="CEP"
-            />
+
+            <InputForm type="number" placeholder="CEP" className={"w-[12.5rem]"} />
+
             <input
               className="w-full bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
               type="text"
               placeholder="Rua"
             />
+            <InputForm type="text" placeholder="Rua" className={"w-full"} />
 
             <div className="flex gap-3 items-center">
-              <input
-                className="w-[12.5rem] bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
-                type="number"
-                placeholder="Número"
-              />
+              <InputForm type="number" placeholder="Número" className={"w-[12.5rem]"} />
+
               <div className="relative w-full ">
-                <input
-                  className="w-full bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
-                  type="text"
-                  placeholder="Complemento"
-                />
+                <InputForm type="text" placeholder="Complemento" className={"w-full"} />
                 <span className="absolute right-3 top-4  text-base-label italic text-xs select-none">Opcional</span>
               </div>
 
@@ -61,23 +54,9 @@ export function Checkout() {
 
             <div className="flex gap-3 items-center">
 
-              <input
-                className="w-[12.5rem] bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
-                type="text"
-                placeholder="Bairro"
-              />
-              <input
-                className="w-full bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
-                type="text"
-                placeholder="Cidade"
-              />
-              <input
-                className="w-[3.75rem] bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
-                type="text"
-
-                placeholder="UF"
-              />
-
+              <InputForm type="text" placeholder="Bairro" className={"w-[12.5rem]"} />
+              <InputForm type="text" placeholder="Cidade" className={"w-full"} />
+              <InputForm type="text" placeholder="UF" className={"w-[3.75rem]"} />
 
             </div>
           </form>
@@ -137,74 +116,9 @@ export function Checkout() {
         <div className="bg-base-card flex items-center w-[28rem] p-10 rounded-md rounded-tr-[2.75rem] rounded-bl-[2.75rem]">
           <div className="w-[23rem] flex flex-col">
 
-            <div className="flex items-start justify-between">
-              <img className="w-16 h-16 mr-5" src={image1} alt="" />
-              <div className="flex flex-col items-start gap-2 flex-1">
-                <span>Expresso Tradicional</span>
 
-                <div className="flex items-center gap-2">
-
-                  <div className="bg-base-button px-2 py-[0.15rem] flex items-center gap-1 rounded-md ">
-                    <button className="text-purple hover:text-purple-dark">
-                      <Minus size={14} weight={"bold"} />
-                    </button>
-                    <span>
-                      2
-                    </span>
-                    <button className="text-purple hover:text-purple-dark">
-                      <Plus size={14} weight={"bold"} />
-                    </button>
-                  </div>
-
-                  <button className="bg-base-button hover:bg-base-hover px-2 py-[0.407rem] flex items-center gap-1 rounded-md ">
-
-                    <Trash weight={"regular"} className="text-purple" />
-
-                    <span className="uppercase text-base-text text-xs">Remover</span>
-
-                  </button>
-
-                </div>
-              </div>
-              <span className="text-base-text text-base font-bold">R$ 9,90</span>
-            </div>
-
-            <span className="border border-solid border-base-button my-6"></span>
-
-            <div className="flex items-start justify-between">
-              <img className="w-16 h-16 mr-5" src={image1} alt="" />
-              <div className="flex flex-col items-start gap-2 flex-1">
-                <span>Expresso Tradicional</span>
-
-                <div className="flex items-center gap-2">
-
-                  <div className="bg-base-button px-2 py-[0.15rem] flex items-center gap-1 rounded-md ">
-                    <button className="text-purple hover:text-purple-dark">
-                      <Minus size={14} weight={"bold"} />
-                    </button>
-                    <span>
-                      2
-                    </span>
-                    <button className="text-purple hover:text-purple-dark">
-                      <Plus size={14} weight={"bold"} />
-                    </button>
-                  </div>
-
-                  <button className="bg-base-button hover:bg-base-hover px-2 py-[0.407rem] flex items-center gap-1 rounded-md ">
-
-                    <Trash weight={"regular"} className="text-purple" />
-
-                    <span className="uppercase text-base-text text-xs">Remover</span>
-
-                  </button>
-
-                </div>
-              </div>
-              <span className="text-base-text text-base font-bold">R$ 9,90</span>
-            </div>
-
-
-            <span className="border border-solid border-base-button my-6"></span>
+            <ItemCartBuy sourceImage={image1} title="Expresso Tradicional" value={9.9} />
+            <ItemCartBuy sourceImage={image1} title="Expresso Tradicional" value={9.9} />
 
             <div className="flex flex-col  text-base-text gap-3">
 

@@ -9,9 +9,11 @@ export function Success() {
         <span className="text-xl text-base-subtitle">Agora é só aguardar que logo o café chegará até você</span>
 
       </div>
+
       <div className="flex items-center mt-10 gap-[6.375rem]">
 
         <div className="p-0.5 bg-gradient-to-tl from-purple to-yellow rounded-md rounded-tr-[2.25rem] rounded-bl-[2.25rem]">
+
           <div className="w-[32.875rem] rounded-md rounded-tr-[2.25rem] rounded-bl-[2.25rem] p-[2.375rem] bg-background flex flex-col gap-8">
 
             <div className="flex items-center justify-start gap-3">
@@ -55,6 +57,7 @@ export function Success() {
         <div className="w-full">
           <img src={imageSuccess} alt="" />
         </div>
+
       </div>
     </div>
   )

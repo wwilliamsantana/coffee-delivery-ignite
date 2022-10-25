@@ -1,9 +1,9 @@
 import { Minus, Plus, ShoppingCart } from "phosphor-react";
-import image1 from "../assets/coffees/Image.svg"
+import image1 from "../../../assets/coffees/Image.svg"
 
 export function ItemCoffee() {
   return (
-    <div className="w-64 h-[19.375rem] flex-1 rounded-md bg-base-card rounded-tr-[2.25rem] rounded-bl-[2.25rem] flex flex-col items-center  ">
+    <main className="w-64 h-[19.375rem] flex-1 rounded-md bg-base-card rounded-tr-[2.25rem] rounded-bl-[2.25rem] flex flex-col items-center  ">
 
       <img className="w-[7.5rem] h-[7.5rem]  -mt-8 " src={image1} alt="" />
 
@@ -40,8 +40,6 @@ export function ItemCoffee() {
             <button className="text-purple hover:text-purple-dark">
               <Plus size={14} weight={"bold"} />
             </button>
-
-
           </div>
 
           <button className="p-2 bg-purple-dark text-white rounded-md hover:bg-purple">
@@ -54,6 +52,6 @@ export function ItemCoffee() {
 
 
 
-    </div>
+    </main>
   )
 }

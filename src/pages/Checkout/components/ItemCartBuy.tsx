@@ -1,0 +1,50 @@
+import { Minus, Plus, Trash } from "phosphor-react";
+import * as Separator from '@radix-ui/react-separator';
+
+
+interface ItemCartbuyProps {
+  sourceImage: string
+  title: string
+  value: number
+
+}
+
+
+export function ItemCartBuy({ sourceImage, title, value }: ItemCartbuyProps) {
+  return (
+    <>
+      <div className="flex items-start justify-between">
+        <img className="w-16 h-16 mr-5" src={sourceImage} alt="" />
+        <div className="flex flex-col items-start gap-2 flex-1">
+          <span>{title}</span>
+
+          <div className="flex items-center gap-2">
+
+            <div className="bg-base-button px-2 py-[0.15rem] flex items-center gap-1 rounded-md ">
+              <button className="text-purple hover:text-purple-dark">
+                <Minus size={14} weight={"bold"} />
+              </button>
+              <span>
+                2
+              </span>
+              <button className="text-purple hover:text-purple-dark">
+                <Plus size={14} weight={"bold"} />
+              </button>
+            </div>
+
+            <button className="bg-base-button hover:bg-base-hover px-2 py-[0.407rem] flex items-center gap-1 rounded-md ">
+
+              <Trash weight={"regular"} className="text-purple" />
+
+              <span className="uppercase text-base-text text-xs">Remover</span>
+
+            </button>
+
+          </div>
+        </div>
+        <span className="text-base-text text-base font-bold">{value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</span>
+      </div>
+      <Separator.Root className="border border-base-button my-6" />
+    </>
+  )
+}

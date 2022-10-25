@@ -15,6 +15,10 @@ export function ListCoffees() {
         <ItemCoffee />
         <ItemCoffee />
         <ItemCoffee />
+        <ItemCoffee />
+        <ItemCoffee />
+        <ItemCoffee />
+        <ItemCoffee />
 
 
 

@@ -1,5 +1,5 @@
 import { Minus, Plus, ShoppingCart } from "phosphor-react";
-import { createContext, useContext, useReducer, useState } from "react";
+import { useContext, useState } from "react";
 import { CoffeesProps } from "../../../context/Coffees";
 import { CycleContext } from "../../../context/ShopCycle";
 import { DetailCoffee } from "./DetailCoffee";
@@ -7,7 +7,6 @@ import { DetailCoffee } from "./DetailCoffee";
 interface ItemsCardCoffee {
   cardItem: CoffeesProps
 }
-
 
 
 export function ItemCoffee({ cardItem }: ItemsCardCoffee) {

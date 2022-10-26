@@ -1,6 +1,6 @@
 import { Minus, Plus, Trash } from "phosphor-react";
 import * as Separator from '@radix-ui/react-separator';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CycleContext } from "../../../context/ShopCycle";
 import { CoffeesProps } from "../../../context/Coffees";
 
@@ -12,8 +12,27 @@ interface ItemCartBuyProps {
 
 
 export function ItemCartBuy({ cardItem, qtd }: ItemCartBuyProps) {
+  const { removeCartBuy, buttonAttQtd } = useContext(CycleContext)
+  const [qtdCoffee, setQtdCoffee] = useState(qtd)
 
-  const { removeCartBuy } = useContext(CycleContext)
+  function handleButtonQtdCoffeeAdd() {
+    setQtdCoffee(state => state + 1)
+
+    buttonAttQtd({ cardItem, qtd: qtdCoffee + 1 })
+
+  }
+
+  function handleButtonQtdCoffeeRemove() {
+    setQtdCoffee(state => {
+      if (qtdCoffee === 0) {
+        return state
+      } else {
+        return state - 1
+      }
+    })
+
+    buttonAttQtd({ cardItem, qtd: qtdCoffee - 1 })
+  }
 
   function handleRemoveCartBuy() {
     removeCartBuy(cardItem)
@@ -29,13 +48,18 @@ export function ItemCartBuy({ cardItem, qtd }: ItemCartBuyProps) {
           <div className="flex items-center gap-2">
 
             <div className="bg-base-button px-2 py-[0.15rem] flex items-center gap-1 rounded-md ">
-              <button className="text-purple hover:text-purple-dark">
+              <button
+                onClick={handleButtonQtdCoffeeRemove}
+                className="text-purple hover:text-purple-dark">
                 <Minus size={14} weight={"bold"} />
               </button>
               <span>
-                {qtd}
+                {qtdCoffee}
               </span>
-              <button className="text-purple hover:text-purple-dark">
+              <button
+                onClick={handleButtonQtdCoffeeAdd}
+                className="text-purple hover:text-purple-dark"
+              >
                 <Plus size={14} weight={"bold"} />
               </button>
             </div>

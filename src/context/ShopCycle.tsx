@@ -2,14 +2,14 @@ import { createContext, ReactNode, useReducer, useState } from "react"
 import { coffeesList, CoffeesProps } from "./Coffees"
 
 
+
 interface ShopCycleType {
   coffeesList: CoffeesProps[]
-  qtdCartBuy: number
 
   cartBuyCycle: CartBuyCycleState[]
   addCartBuy: (cardItem: CartBuyCycleState) => void
   removeCartBuy: (cardItem: CoffeesProps) => void
-
+  buttonAttQtd: (cardItem: CartBuyCycleState) => void
 
 }
 
@@ -28,51 +28,35 @@ interface CartBuyCycleState {
 
 export function CycleContextProvider({ children }: CycleContextProps) {
 
-  const [cartBuyCycle, dispatch] = useReducer((state: CartBuyCycleState[], action: any) => {
-
-
-    if (action.type === "ADD_CART_BUY") {
-      return [...state, action.payload.cardItem]
-    }
-    if (action.type === "REMOVE_CART_BUY") {
-      return state.filter(item => item.cardItem.id !== action.payload.cardItem.id)
-
-    }
-    return state
-  }, [])
-
+  const [cartBuyCycle, setCartBuyCycle] = useState<CartBuyCycleState[]>([])
 
 
   function addCartBuy(cardItem: CartBuyCycleState) {
-    dispatch({
-      type: "ADD_CART_BUY",
-      payload: {
-        cardItem
-      }
-    })
+    setCartBuyCycle(state => [...state, cardItem])
   }
 
   function removeCartBuy(cardItem: CoffeesProps) {
+    setCartBuyCycle(state => state.filter(item => item.cardItem.id !== cardItem.id))
+  }
 
-    dispatch({
-      type: "REMOVE_CART_BUY",
-      payload: {
-        cardItem
+  function buttonAttQtd(cardItem: CartBuyCycleState) {
+    const newValue = cartBuyCycle.map(item => {
+      if (item.cardItem.id === cardItem.cardItem.id) {
+        item.qtd = cardItem.qtd
+      } else {
+        return item
       }
+      return item
     })
+
+    setCartBuyCycle(newValue)
 
   }
 
-
-  const qtdCartBuy = cartBuyCycle.reduce((acc, item) => acc + item.qtd, 0)
-
-
-
-
-
+  console.log(cartBuyCycle)
   return (
     <CycleContext.Provider
-      value={{ coffeesList, addCartBuy, qtdCartBuy, cartBuyCycle, removeCartBuy }}
+      value={{ coffeesList, addCartBuy, cartBuyCycle, removeCartBuy, buttonAttQtd }}
     >
       {children}
     </CycleContext.Provider>

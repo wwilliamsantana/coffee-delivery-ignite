@@ -30,7 +30,7 @@ export const coffeesList: CoffeesProps[] = [
     detail: [
       "tradicional"
     ],
-    value: 9.9,
+    value: 5.9,
     imageSRC: image1
   },
   {
@@ -40,7 +40,7 @@ export const coffeesList: CoffeesProps[] = [
     detail: [
       "tradicional"
     ],
-    value: 9.9,
+    value: 6.9,
     imageSRC: image2
   },
   {
@@ -72,7 +72,7 @@ export const coffeesList: CoffeesProps[] = [
       "tradicional",
       "Com leite"
     ],
-    value: 9.9,
+    value: 7.9,
     imageSRC: image5
   },
   {
@@ -83,7 +83,7 @@ export const coffeesList: CoffeesProps[] = [
       "tradicional",
       "Com leite"
     ],
-    value: 9.9,
+    value: 12.9,
     imageSRC: image6
   },
   {
@@ -94,7 +94,7 @@ export const coffeesList: CoffeesProps[] = [
       "tradicional",
       "Com leite"
     ],
-    value: 9.9,
+    value: 12.9,
     imageSRC: image7
   },
   {
@@ -105,7 +105,7 @@ export const coffeesList: CoffeesProps[] = [
       "Tradicional",
       "Com leite"
     ],
-    value: 9.9,
+    value: 12.9,
     imageSRC: image8
   },
   {
@@ -116,7 +116,7 @@ export const coffeesList: CoffeesProps[] = [
       "Tradicional",
       "Com leite"
     ],
-    value: 9.9,
+    value: 12.9,
     imageSRC: image9
   },
   {
@@ -139,7 +139,7 @@ export const coffeesList: CoffeesProps[] = [
       "Alcoólico",
       "Gelado"
     ],
-    value: 9.9,
+    value: 15.9,
     imageSRC: image11
   },
   {
@@ -149,7 +149,7 @@ export const coffeesList: CoffeesProps[] = [
     detail: [
       "Especial"
     ],
-    value: 9.9,
+    value: 15.9,
     imageSRC: image12
   },
   {
@@ -159,7 +159,7 @@ export const coffeesList: CoffeesProps[] = [
     detail: [
       "Especial"
     ],
-    value: 9.9,
+    value: 15.9,
     imageSRC: image13
   },
   {
@@ -170,7 +170,7 @@ export const coffeesList: CoffeesProps[] = [
       "Especial",
       "Alcoólico"
     ],
-    value: 9.9,
+    value: 15.9,
     imageSRC: image14
   }
 ]

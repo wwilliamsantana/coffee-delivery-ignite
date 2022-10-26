@@ -6,15 +6,24 @@ import { InputForm } from "./components/InputForm";
 import { ItemCartBuy } from "./components/ItemCartBuy";
 import { CycleContext } from "../../context/ShopCycle";
 
+
+
 export function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState<string>("")
 
   const { cartBuyCycle } = useContext(CycleContext)
 
 
+  const totalItems = cartBuyCycle.reduce((acc, item) => {
+    return acc + (item.cardItem.value * item.qtd)
+  }, 0)
 
+  const valueDelivery = 3.5
+
+  const totalAll = totalItems === 0 ? 0 : totalItems + valueDelivery
 
   return (
+
     <div className="max-w-[70rem] mx-auto flex items-start justify-center gap-8 mt-10">
 
       <div className="flex flex-col flex-1 gap-[0.9375rem] items-start">
@@ -119,26 +128,24 @@ export function Checkout() {
           <div className="w-[23rem] flex flex-col">
 
             {
-              cartBuyCycle.map(item => <ItemCartBuy cardItem={item.cardItem} qtd={item.qtd} />)
+              cartBuyCycle.map(item => <ItemCartBuy key={item.cardItem.id} cardItem={item.cardItem} qtd={item.qtd} />)
             }
-
-
 
             <div className="flex flex-col  text-base-text gap-3">
 
               <div className="flex items-center justify-between">
                 <span className="text-sm">Total de itens</span>
-                <span className="text-base">R$ 29,70</span>
+                <span className="text-base">{totalItems.toLocaleString("pt-br", { style: "currency", currency: "BRL" })}</span>
               </div>
 
               <div className="flex items-center justify-between">
                 <span className="text-sm">Entrega</span>
-                <span className="text-base">R$ 3,50</span>
+                <span className="text-base">{valueDelivery.toLocaleString("pt-br", { style: "currency", currency: "BRL" })}</span>
               </div>
 
               <div className="flex items-center justify-between text-xl font-bold">
                 <span>Total</span>
-                <span>R$ 33,20</span>
+                <span>{totalAll.toLocaleString("pt-br", { style: "currency", currency: "BRL" })}</span>
               </div>
 
             </div>
@@ -155,5 +162,6 @@ export function Checkout() {
 
 
     </div>
+
   )
 }

@@ -1,8 +1,12 @@
 import logo from "../assets/Logo.svg"
 import { NavLink } from "react-router-dom"
 import { ShoppingCart, MapPin } from "phosphor-react"
+import { useContext } from "react"
+import { CycleContext } from "../context/ShopCycle"
 
 export function Navbar() {
+  const { qtdCartBuy } = useContext(CycleContext)
+
   return (
     <div className="max-w-[70rem] mx-auto py-8 flex justify-between items-center">
 
@@ -23,11 +27,16 @@ export function Navbar() {
           <button className="p-2 bg-yellow-light text-yellow-dark rounded-md ">
             <ShoppingCart size={22} weight="fill" />
           </button>
-          <div className="absolute -top-2 -right-2 ">
-            <div className=" w-5 h-5 rounded-full bg-yellow-dark text-white text-center pt-0.5 text-xs">
-              5
-            </div>
-          </div>
+
+          {qtdCartBuy === 0 ? " "
+            :
+            <div className="absolute -top-2 -right-2 ">
+              <div className=" w-5 h-5 rounded-full bg-yellow-dark text-white text-center pt-0.5 text-xs">
+                {qtdCartBuy}
+              </div>
+            </div>}
+
+
         </NavLink>
 
       </div>

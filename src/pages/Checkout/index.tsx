@@ -1,16 +1,18 @@
-import { Minus, Plus, Trash, MapPinLine, CurrencyDollar, CreditCard, Bank, Money } from "phosphor-react"
+import { MapPinLine, CurrencyDollar, CreditCard, Bank, Money } from "phosphor-react"
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
-import image1 from "../../assets/coffees/Image.svg"
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { InputForm } from "./components/InputForm";
 import { ItemCartBuy } from "./components/ItemCartBuy";
+import { CycleContext } from "../../context/ShopCycle";
 
 export function Checkout() {
-
   const [paymentMethod, setPaymentMethod] = useState<string>("")
 
-  console.log(paymentMethod)
+  const { cartBuyCycle } = useContext(CycleContext)
+
+
+
 
   return (
     <div className="max-w-[70rem] mx-auto flex items-start justify-center gap-8 mt-10">
@@ -116,9 +118,11 @@ export function Checkout() {
         <div className="bg-base-card flex items-center w-[28rem] p-10 rounded-md rounded-tr-[2.75rem] rounded-bl-[2.75rem]">
           <div className="w-[23rem] flex flex-col">
 
+            {
+              cartBuyCycle.map(item => <ItemCartBuy cardItem={item.cardItem} qtd={item.qtd} />)
+            }
 
-            <ItemCartBuy sourceImage={image1} title="Expresso Tradicional" value={9.9} />
-            <ItemCartBuy sourceImage={image1} title="Expresso Tradicional" value={9.9} />
+
 
             <div className="flex flex-col  text-base-text gap-3">
 

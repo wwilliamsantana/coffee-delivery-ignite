@@ -15,10 +15,10 @@ export function Heading() {
 
           <div className="mt-16 grid grid-cols-2 gap-x-10 gap-y-5">
 
-            <IconText element={<ShoppingCart weight='fill' />} color={"bg-yellow-dark"} />
-            <IconText element={<Package weight='fill' />} color={"bg-yellow"} />
-            <IconText element={<Timer weight='fill' />} color={"bg-base-text"} />
-            <IconText element={<Coffee weight='fill' />} color={"bg-purple"} />
+            <IconText children={<ShoppingCart weight='fill' />} color={"bg-yellow-dark"} />
+            <IconText children={<Package weight='fill' />} color={"bg-yellow"} />
+            <IconText children={<Timer weight='fill' />} color={"bg-base-text"} />
+            <IconText children={<Coffee weight='fill' />} color={"bg-purple"} />
 
           </div>
 

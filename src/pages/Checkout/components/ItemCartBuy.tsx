@@ -1,22 +1,30 @@
 import { Minus, Plus, Trash } from "phosphor-react";
 import * as Separator from '@radix-ui/react-separator';
+import { useContext } from "react";
+import { CycleContext } from "../../../context/ShopCycle";
+import { CoffeesProps } from "../../../context/Coffees";
 
 
-interface ItemCartbuyProps {
-  sourceImage: string
-  title: string
-  value: number
-
+interface ItemCartBuyProps {
+  cardItem: CoffeesProps
+  qtd: number
 }
 
 
-export function ItemCartBuy({ sourceImage, title, value }: ItemCartbuyProps) {
+export function ItemCartBuy({ cardItem, qtd }: ItemCartBuyProps) {
+
+  const { removeCartBuy } = useContext(CycleContext)
+
+  function handleRemoveCartBuy() {
+    removeCartBuy(cardItem)
+  }
+
   return (
     <>
       <div className="flex items-start justify-between">
-        <img className="w-16 h-16 mr-5" src={sourceImage} alt="" />
+        <img className="w-16 h-16 mr-5" src={cardItem.imageSRC} alt="" />
         <div className="flex flex-col items-start gap-2 flex-1">
-          <span>{title}</span>
+          <span>{cardItem.title}</span>
 
           <div className="flex items-center gap-2">
 
@@ -25,14 +33,17 @@ export function ItemCartBuy({ sourceImage, title, value }: ItemCartbuyProps) {
                 <Minus size={14} weight={"bold"} />
               </button>
               <span>
-                2
+                {qtd}
               </span>
               <button className="text-purple hover:text-purple-dark">
                 <Plus size={14} weight={"bold"} />
               </button>
             </div>
 
-            <button className="bg-base-button hover:bg-base-hover px-2 py-[0.407rem] flex items-center gap-1 rounded-md ">
+            <button
+              onClick={handleRemoveCartBuy}
+              className="bg-base-button hover:bg-base-hover px-2 py-[0.407rem] flex items-center gap-1 rounded-md "
+            >
 
               <Trash weight={"regular"} className="text-purple" />
 
@@ -42,7 +53,7 @@ export function ItemCartBuy({ sourceImage, title, value }: ItemCartbuyProps) {
 
           </div>
         </div>
-        <span className="text-base-text text-base font-bold">{value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</span>
+        <span className="text-base-text text-base font-bold">{cardItem.value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</span>
       </div>
       <Separator.Root className="border border-base-button my-6" />
     </>

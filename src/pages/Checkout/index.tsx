@@ -2,25 +2,65 @@ import { MapPinLine, CurrencyDollar, CreditCard, Bank, Money } from "phosphor-re
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { InputForm } from "./components/InputForm";
+import { Form } from "./components/Form";
 import { ItemCartBuy } from "./components/ItemCartBuy";
 import { CycleContext } from "../../context/ShopCycle";
+import { useForm, FormProvider } from "react-hook-form";
+import * as zod from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
 
+
+const schemaIsValidateInput = zod.object({
+  zip: zod.number().min(1, "Informe um CEP"),
+  street: zod.string().min(3, "Informe uma Rua"),
+  numberHome: zod.number().min(1, "Informe  o número da casa"),
+  district: zod.string().min(1, "informe o bairro"),
+  complement: zod.optional(zod.string()),
+  city: zod.string().min(1, "informe a cidade"),
+  uf: zod.string().min(2).max(2)
+})
+
+type newDeliveryData = zod.infer<typeof schemaIsValidateInput>
+
+
+
+const paymentMethodType: any = {
+  "0": "Cartão de crédito",
+  "1": "Cartão de débito",
+  "2": "Dinehiro"
+}
 
 
 export function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState<string>("")
-
   const { cartBuyCycle } = useContext(CycleContext)
-
 
   const totalItems = cartBuyCycle.reduce((acc, item) => {
     return acc + (item.cardItem.value * item.qtd)
   }, 0)
-
   const valueDelivery = 3.5
-
   const totalAll = totalItems === 0 ? 0 : totalItems + valueDelivery
+
+
+  const newDataForm = useForm<newDeliveryData>({
+    resolver: zodResolver(schemaIsValidateInput)
+  })
+
+  const { register, handleSubmit, reset, formState } = newDataForm
+
+  function handleInputData(data: newDeliveryData) {
+    const paymentType = paymentMethodType[paymentMethod]
+
+    const dataClient = {
+      paymentType,
+      ...data
+    }
+
+    console.log(dataClient)
+
+    reset()
+    setPaymentMethod("")
+  }
 
   return (
 
@@ -41,37 +81,11 @@ export function Checkout() {
 
           </div>
 
-          <form action="" className="flex flex-col gap-4">
-
-
-            <InputForm type="number" placeholder="CEP" className={"w-[12.5rem]"} />
-
-            <input
-              className="w-full bg-base-input p-3 text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
-              type="text"
-              placeholder="Rua"
-            />
-            <InputForm type="text" placeholder="Rua" className={"w-full"} />
-
-            <div className="flex gap-3 items-center">
-              <InputForm type="number" placeholder="Número" className={"w-[12.5rem]"} />
-
-              <div className="relative w-full ">
-                <InputForm type="text" placeholder="Complemento" className={"w-full"} />
-                <span className="absolute right-3 top-4  text-base-label italic text-xs select-none">Opcional</span>
-              </div>
-
-            </div>
-
-            <div className="flex gap-3 items-center">
-
-              <InputForm type="text" placeholder="Bairro" className={"w-[12.5rem]"} />
-              <InputForm type="text" placeholder="Cidade" className={"w-full"} />
-              <InputForm type="text" placeholder="UF" className={"w-[3.75rem]"} />
-
-            </div>
+          <form id="dataForm" onSubmit={handleSubmit(handleInputData)}>
+            <FormProvider {...newDataForm}>
+              <Form />
+            </FormProvider>
           </form>
-
         </div>
 
 
@@ -92,7 +106,7 @@ export function Checkout() {
               className={`uppercase w-full p-4 rounded-md  text-base-text text-xs hover:bg-base-hover flex items-center gap-3 ${paymentMethod === "0" ? "bg-purple-light border-1 ring-1 ring-purple" : "bg-base-button ring-0"}`}
             >
               <CreditCard size={17} className="text-purple" />
-              Cartão de Crédito
+              Cartão de crédito
             </ToggleGroup.Item>
 
             <ToggleGroup.Item
@@ -112,11 +126,7 @@ export function Checkout() {
             </ToggleGroup.Item>
           </ToggleGroup.Root>
 
-
-
-
         </div>
-
       </div>
 
 
@@ -151,7 +161,11 @@ export function Checkout() {
             </div>
 
             <NavLink to={"/checkout/success"}>
-              <button className="bg-yellow hover:bg-yellow-dark w-full text-white font-bold px-2 py-3 rounded-md uppercase text-center mt-6">
+              <button
+
+                type="submit"
+                form="dataForm"
+                className="bg-yellow hover:bg-yellow-dark w-full text-white font-bold px-2 py-3 rounded-md uppercase text-center mt-6">
                 Confirmar pedido
               </button>
             </NavLink>

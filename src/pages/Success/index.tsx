@@ -1,7 +1,11 @@
 import { MapPin, Money, Timer } from "phosphor-react"
+import { useContext } from "react"
 import imageSuccess from "../../assets/Ilustration.svg"
+import { CycleContext } from "../../context/ShopCycle"
 
 export function Success() {
+  const { dataClient } = useContext(CycleContext)
+
   return (
     <div className="max-w-[70rem] mx-auto">
       <div className="w-full flex flex-col items-start mt-20">
@@ -22,7 +26,7 @@ export function Success() {
               </div>
 
               <div className="text-base-text">
-                <span>Entrega em <strong>Rua João Daniel Martinelli, 102</strong>{<br />} Farrapos - Porto Alegre, RS</span >
+                <span>Entrega em <strong>{`${dataClient?.street}, ${dataClient?.numberHome}`}</strong>{<br />} {`${dataClient?.district} - ${dataClient?.city}, ${dataClient?.uf}`}</span >
               </div>
 
             </div>
@@ -44,7 +48,7 @@ export function Success() {
               </div>
 
               <div className="text-base-text">
-                <span>Pagamento na entrega{<br />}<strong>Cartão de crédito</strong></span >
+                <span>Pagamento na entrega{<br />}<strong>{dataClient?.paymentType}</strong></span >
               </div>
 
             </div>

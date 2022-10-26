@@ -1,7 +1,6 @@
 import { MapPinLine, CurrencyDollar, CreditCard, Bank, Money } from "phosphor-react"
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
 import { Form } from "./components/Form";
 import { ItemCartBuy } from "./components/ItemCartBuy";
 import { CycleContext } from "../../context/ShopCycle";
@@ -23,7 +22,6 @@ const schemaIsValidateInput = zod.object({
 type newDeliveryData = zod.infer<typeof schemaIsValidateInput>
 
 
-
 const paymentMethodType: any = {
   "0": "Cartão de crédito",
   "1": "Cartão de débito",
@@ -33,20 +31,13 @@ const paymentMethodType: any = {
 
 export function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState<string>("")
-  const { cartBuyCycle } = useContext(CycleContext)
-
-  const totalItems = cartBuyCycle.reduce((acc, item) => {
-    return acc + (item.cardItem.value * item.qtd)
-  }, 0)
-  const valueDelivery = 3.5
-  const totalAll = totalItems === 0 ? 0 : totalItems + valueDelivery
-
+  const { cartBuyCycle, dataClientGet } = useContext(CycleContext)
 
   const newDataForm = useForm<newDeliveryData>({
     resolver: zodResolver(schemaIsValidateInput)
   })
 
-  const { register, handleSubmit, reset, formState } = newDataForm
+  const { register, handleSubmit, reset } = newDataForm
 
   function handleInputData(data: newDeliveryData) {
     const paymentType = paymentMethodType[paymentMethod]
@@ -55,12 +46,22 @@ export function Checkout() {
       paymentType,
       ...data
     }
+    dataClientGet(dataClient)
 
-    console.log(dataClient)
-
-    reset()
     setPaymentMethod("")
+    reset()
   }
+
+
+
+  const isDisableButton = !paymentMethod
+  const totalItems = cartBuyCycle.reduce((acc, item) => {
+    return acc + (item.cardItem.value * item.qtd)
+  }, 0)
+  const valueDelivery = 3.5
+  const totalAll = totalItems === 0 ? 0 : totalItems + valueDelivery
+
+
 
   return (
 
@@ -81,7 +82,7 @@ export function Checkout() {
 
           </div>
 
-          <form id="dataForm" onSubmit={handleSubmit(handleInputData)}>
+          <form id="dataForm" onSubmit={handleSubmit(handleInputData)} autoComplete="off">
             <FormProvider {...newDataForm}>
               <Form />
             </FormProvider>
@@ -160,15 +161,17 @@ export function Checkout() {
 
             </div>
 
-            <NavLink to={"/checkout/success"}>
-              <button
 
-                type="submit"
-                form="dataForm"
-                className="bg-yellow hover:bg-yellow-dark w-full text-white font-bold px-2 py-3 rounded-md uppercase text-center mt-6">
-                Confirmar pedido
-              </button>
-            </NavLink>
+            <button
+              disabled={isDisableButton}
+              type="submit"
+              form="dataForm"
+              className="bg-yellow hover:bg-yellow-dark w-full text-white font-bold px-2 py-3 rounded-md uppercase text-center mt-6 disabled:opacity-[0.7] disabled:cursor-not-allowed">
+
+              Confirmar pedido
+
+            </button>
+
 
           </div>
         </div>

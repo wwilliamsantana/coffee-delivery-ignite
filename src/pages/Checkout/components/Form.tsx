@@ -60,6 +60,8 @@ export function Form() {
           type="text"
           placeholder="UF"
           id="uf"
+          min={1}
+          max={2}
           className="bg-base-input p-3 w-[3.75rem] text-base-text placeholder:text-base-label rounded  outline-none  focus:ring-1 ring-yellow-dark"
           {...register("uf")}
         />

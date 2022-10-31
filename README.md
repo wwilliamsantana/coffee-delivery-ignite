@@ -12,6 +12,8 @@
 - React + TypeScript
 - Tailwind CSS
 - React hook Form
+- useReducer
+- Immer
 - React Router Dom
 - Zod (Validação do formulário)
 - Vite

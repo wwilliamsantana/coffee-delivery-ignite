@@ -41,33 +41,33 @@ interface DataClientState {
 
 export function CycleContextProvider({ children }: CycleContextProps) {
 
-  // const [cartBuyCycle, setCartBuyCycle] = useState<CartBuyCycleState[]>([])
   const [cartBuyCycle, dispatch] = useReducer((state: CartBuyCycleState[], action: any) => {
 
     if (action.type === "ADD_CART_BUY") {
-      return [...state, action.payload.cardItem]
+      return produce(state, (draft) => {
+        draft.push(action.payload.cardItem)
+      })
 
     }
 
     if (action.type === "REMOVE_CART_BUY") {
-      return state.filter(item => item.cardItem.id !== action.payload.cardItem.id)
+      return produce(state, (draft) => {
+        return draft.filter(item => item.cardItem.id !== action.payload.cardItem.id)
+      })
 
     }
 
     if (action.type === "BUTTON_ADD_QTD") {
-      const newValue = state.map(item => {
-        if (item.cardItem.id === action.payload.cardItem.cardItem.id) {
-          item.qtd = action.payload.cardItem.qtd
-        } else {
-          return item
-        }
-        return item
+      const currentIndex = state.findIndex(item => item.cardItem.id === action.payload.cardItem.cardItem.id)
+
+      if (currentIndex < 0) {
+        return state
+      }
+
+      return produce(state, (draft) => {
+        draft[currentIndex].qtd = action.payload.cardItem.qtd
       })
-      return newValue
-
     }
-
-
 
     return state
   }, [])
@@ -77,7 +77,7 @@ export function CycleContextProvider({ children }: CycleContextProps) {
   const navigate = useNavigate()
 
   function addCartBuy(cardItem: CartBuyCycleState) {
-    // setCartBuyCycle(state => [...state, cardItem])
+
     dispatch({
       type: "ADD_CART_BUY",
       payload: {
@@ -87,7 +87,7 @@ export function CycleContextProvider({ children }: CycleContextProps) {
   }
 
   function removeCartBuy(cardItem: CoffeesProps) {
-    // setCartBuyCycle(state => state.filter(item => item.cardItem.id !== cardItem.id))
+
     dispatch({
       type: "REMOVE_CART_BUY",
       payload: {
@@ -97,17 +97,7 @@ export function CycleContextProvider({ children }: CycleContextProps) {
   }
 
   function buttonAttQtd(cardItem: CartBuyCycleState) {
-    // const newValue = cartBuyCycle.map(item => {
-    //   if (item.cardItem.id === cardItem.cardItem.id) {
-    //     item.qtd = cardItem.qtd
-    //   } else {
-    //     return item
-    //   }
-    //   return item
-    // })
 
-    // setCartBuyCycle(newValue)
-    // console.log(cardItem)
     dispatch({
       type: "BUTTON_ADD_QTD",
       payload: {

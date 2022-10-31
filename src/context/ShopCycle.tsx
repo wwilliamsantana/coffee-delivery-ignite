@@ -7,12 +7,12 @@ import { produce } from "immer"
 
 interface ShopCycleType {
   coffeesList: CoffeesProps[]
-  cartBuyCycle: CartBuyCycleState[]
+  cartBuy: CartBuyCycleState[]
   dataClient: DataClientState | undefined
   addCartBuy: (cardItem: CartBuyCycleState) => void
-  removeCartBuy: (cardItem: CoffeesProps) => void
+  removeCartBuy: (cardItem: CartBuyCycleState) => void
   buttonAttQtd: (cardItem: CartBuyCycleState) => void
-  // dataClientGet: (data: any) => void
+  dataClientGet: (data: any) => void
 
 }
 
@@ -39,41 +39,58 @@ interface DataClientState {
   paymentType: string
 }
 
+interface CartBuy {
+  cartBuy: CartBuyCycleState[]
+  dataClient: DataClientState | undefined
+}
+
 export function CycleContextProvider({ children }: CycleContextProps) {
 
-  const [cartBuyCycle, dispatch] = useReducer((state: CartBuyCycleState[], action: any) => {
+  const [cartBuyState, dispatch] = useReducer((state: CartBuy, action: any) => {
 
     if (action.type === "ADD_CART_BUY") {
       return produce(state, (draft) => {
-        draft.push(action.payload.cardItem)
+        draft.cartBuy.push(action.payload.cardItem)
       })
-
     }
 
     if (action.type === "REMOVE_CART_BUY") {
-      return produce(state, (draft) => {
-        return draft.filter(item => item.cardItem.id !== action.payload.cardItem.id)
-      })
 
+      return produce(state, (draft) => {
+        draft.cartBuy = draft.cartBuy.filter(item => item.cardItem.id !== action.payload.cardItem.cardItem.id)
+      })
     }
 
+
     if (action.type === "BUTTON_ADD_QTD") {
-      const currentIndex = state.findIndex(item => item.cardItem.id === action.payload.cardItem.cardItem.id)
+      const currentIndex = state.cartBuy.findIndex(item => item.cardItem.id === action.payload.cardItem.cardItem.id)
 
       if (currentIndex < 0) {
         return state
       }
 
       return produce(state, (draft) => {
-        draft[currentIndex].qtd = action.payload.cardItem.qtd
+        draft.cartBuy[currentIndex].qtd = action.payload.cardItem.qtd
+      })
+    }
+
+    if (action.type === "DATA_CLIENT_GET") {
+      return produce(state, (draft) => {
+        draft.dataClient = action.payload.data
+        draft.cartBuy = []
       })
     }
 
     return state
-  }, [])
+  },
+    {
+      cartBuy: [],
+      dataClient: undefined
+    }
+  )
 
+  const { cartBuy, dataClient } = cartBuyState
 
-  const [dataClient, setDataClient] = useState<DataClientState>()
   const navigate = useNavigate()
 
   function addCartBuy(cardItem: CartBuyCycleState) {
@@ -86,7 +103,7 @@ export function CycleContextProvider({ children }: CycleContextProps) {
     })
   }
 
-  function removeCartBuy(cardItem: CoffeesProps) {
+  function removeCartBuy(cardItem: CartBuyCycleState) {
 
     dispatch({
       type: "REMOVE_CART_BUY",
@@ -107,15 +124,19 @@ export function CycleContextProvider({ children }: CycleContextProps) {
 
   }
 
-  // function dataClientGet(data: DataClientState) {
-  //   setDataClient(data)
-  //   setCartBuyCycle([])
-  //   navigate("/checkout/success")
-  // }
+  function dataClientGet(data: DataClientState) {
+    dispatch({
+      type: "DATA_CLIENT_GET",
+      payload: {
+        data
+      }
+    })
+    navigate("/checkout/success")
+  }
 
   return (
     <CycleContext.Provider
-      value={{ coffeesList, addCartBuy, cartBuyCycle, removeCartBuy, buttonAttQtd,/* dataClientGet,*/ dataClient }}
+      value={{ coffeesList, addCartBuy, cartBuy, removeCartBuy, buttonAttQtd, dataClientGet, dataClient }}
     >
       {children}
     </CycleContext.Provider>

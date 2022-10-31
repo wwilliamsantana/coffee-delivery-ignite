@@ -35,7 +35,7 @@ export function ItemCartBuy({ cardItem, qtd }: ItemCartBuyProps) {
   }
 
   function handleRemoveCartBuy() {
-    removeCartBuy(cardItem)
+    removeCartBuy({ cardItem, qtd })
   }
 
   return (

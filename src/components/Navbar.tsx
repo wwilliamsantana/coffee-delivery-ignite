@@ -5,9 +5,9 @@ import { useContext, useEffect } from "react"
 import { CycleContext } from "../context/ShopCycle"
 
 export function Navbar() {
-  const { cartBuyCycle } = useContext(CycleContext)
+  const { cartBuy } = useContext(CycleContext)
 
-  const qtdCartBuy = cartBuyCycle.reduce((acc, item) => acc + item.qtd, 0)
+  const qtdCartBuy = cartBuy.reduce((acc, item) => acc + item.qtd, 0)
 
   return (
     <div className="max-w-[70rem] mx-auto py-8 flex justify-between items-center">

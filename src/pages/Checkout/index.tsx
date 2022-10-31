@@ -31,7 +31,7 @@ const paymentMethodType: any = {
 
 export function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState<string>("")
-  const { cartBuyCycle, dataClientGet } = useContext(CycleContext)
+  const { cartBuy, dataClientGet } = useContext(CycleContext)
 
   const newDataForm = useForm<newDeliveryData>({
     resolver: zodResolver(schemaIsValidateInput)
@@ -55,7 +55,7 @@ export function Checkout() {
 
 
   const isDisableButton = !paymentMethod
-  const totalItems = cartBuyCycle.reduce((acc, item) => {
+  const totalItems = cartBuy.reduce((acc, item) => {
     return acc + (item.cardItem.value * item.qtd)
   }, 0)
   const valueDelivery = 3.5
@@ -139,7 +139,7 @@ export function Checkout() {
           <div className="w-[23rem] flex flex-col">
 
             {
-              cartBuyCycle.map(item => <ItemCartBuy key={item.cardItem.id} cardItem={item.cardItem} qtd={item.qtd} />)
+              cartBuy.map(item => <ItemCartBuy key={item.cardItem.id} cardItem={item.cardItem} qtd={item.qtd} />)
             }
 
             <div className="flex flex-col  text-base-text gap-3">
